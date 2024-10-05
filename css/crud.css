@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif; 
+    background-color: #2f00da;
+    margin: 0;
+    padding: 0;
+    color: #111;
+}
+
+#crudContainer {
+    width: 60%;
+    text-align: center;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #FF9900;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.crud-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.crud-buttons button {
+    background-color: #f0c14b;
+    color: #111;
+    border: 1px solid #a88734;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Amazon Ember Bold', sans-serif;
+}
+
+.crud-buttons button:hover {
+    background-color: #e7b12a;
+}
+
+#crudContent h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#crudContent form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#createForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+#createForm input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#createForm input[type="file"] {
+    padding: 5px;
+}
+
+#createForm button[type="submit"] {
+    background-color: #f0c14b;
+    color: #111;
+    border: 1px solid #a88734;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Amazon Ember Bold', sans-serif;
+}
+
+#createForm button[type="submit"]:hover {
+    background-color: #e7b12a;
+}
+
+#createForm textarea {
+    height: 100px;
+    resize: vertical;
+}
+

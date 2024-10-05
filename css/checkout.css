@@ -1,0 +1,165 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+header {
+    background-color: #232f3e; /* Amazon header color */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Main Styles */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #232f3e; /* Darker shade for headings */
+    border-bottom: 2px solid #f0c14b; /* Amazon golden color */
+    padding-bottom: 10px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f7f7f7;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd; /* Light border for table */
+}
+
+th {
+    background-color: #f0c14b; /* Amazon golden color for header */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Hover effect for rows */
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="radio"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in total width */
+}
+
+input[type="radio"] {
+    width: auto; /* Make radio buttons smaller */
+}
+
+/* Button Styles */
+button {
+    background-color: #ffa41c; /* Amazon's button color */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%; /* Full-width buttons */
+    margin: 15px;
+}
+
+#order-sec {
+    display: flex;
+    justify-content: space-between;
+}
+
+button:hover {
+    background-color: #ff8c1c; /* Darker shade on hover */
+}
+
+#go-back {
+    text-align: center; /* Center go back button */
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #232f3e; /* Footer background color */
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    main {
+        max-width: 95%; /* Increase width for smaller devices */
+        padding: 15px;
+    }
+
+    #order-sec {
+        flex-direction: column; /* Stack items vertically on small screens */
+        gap: 10px; /* Add spacing between stacked items */
+    }
+
+    button {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px; /* Adjust button size on small screens */
+    }
+
+    table, thead, th, td {
+        display: block; /* Make table elements block-level for mobile */
+        width: 100%; /* Full width for mobile */
+    }
+
+    th {
+        background-color: #f0c14b; /* Ensure header still stands out */
+        padding: 10px 0;
+    }
+
+    td {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr {
+        display: flex; /* Stack rows vertically */
+        flex-direction: column;
+        padding: 10px 0;
+    }
+}

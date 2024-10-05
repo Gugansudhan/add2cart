@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+    <link rel="stylesheet" href="css/crud.css">
+    <link rel="stylesheet" href="css/read.css">
+    <link rel="stylesheet" href="css/create.css">
+</head>
+<body>
+    <div id="crudContainer">
+        <h1>CRUD Operations</h1>
+        
+        <!-- Horizontal Button Options -->
+        <div class="crud-buttons">
+            <button onclick="create()">Create</button>
+            <button onclick="readProduct()" class="read-btn">Read</button>
+        </div>
+
+        <!-- Dynamic Section Container -->
+        <div id="crudContent">
+        </div>
+    </div>
+
+    <script type="module" src="js/crud.js"></script>
+</body>
+</html>

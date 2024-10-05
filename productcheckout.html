@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+
+<header>
+    <h1>Checkout</h1>
+</header>
+
+<main>
+    <section id="cart-details">
+        <h2>Your Cart</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items-body">
+                <!-- Cart items will be dynamically loaded here -->
+            </tbody>
+        </table>
+        <p>Total: $<span id="total-price">0.00</span></p>
+    </section>
+
+    <section id="shipping-address">
+        <h2>Shipping Address</h2>
+        <input type="text" id="address" placeholder="Enter your shipping address" required>
+    </section>
+
+    <section id="coupon-code">
+        <h2>Coupon Code (Optional)</h2>
+        <input type="text" id="coupon" placeholder="Enter coupon code">
+    </section>
+
+    <section id="payment-method">
+        <h2>Payment Method</h2>
+        <label>
+            <input type="radio" name="payment" value="cash-on-delivery" required>
+            Cash on Delivery
+        </label>
+        <label>
+            <input type="radio" name="payment" value="credit-card">
+            Credit Card
+        </label>
+        <label>
+            <input type="radio" name="payment" value="debit-card">
+            Debit Card
+        </label>
+        <label>
+            <input type="radio" name="payment" value="credit-limit">
+            Credit Limit ($<span id="credit-limit">0.00</span>)
+        </label>
+        <p>Your Current Credit Limit: $<span id="credit-limit-display">0.00</span></p>
+    </section>
+    <div id="order-sec">
+        <button id="place-order-button">Place Order</button>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 add2cart</p>
+</footer>
+
+<script src="js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer Credit Limits</title>
+    <link rel="stylesheet" href="css/credit_limits.css"> <!-- Add your CSS styles here -->
+</head>
+<body>
+    <div id="creditLimitContainer">
+        <h1>Edit Customer Credit Limits</h1>
+        
+        <!-- Search for user form -->
+        <section id="searchUser">
+            <h2>Search User</h2>
+            <form id="searchUserForm">
+                <label for="searchField">Enter User ID or Email:</label>
+                <input type="text" id="searchField" name="searchField" placeholder="User ID or Email" required>
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <!-- Edit Credit Limit Form -->
+        <section id="editCreditLimit" style="display: none;"> <!-- Hidden by default -->
+            <h2>Edit Credit Limit</h2>
+            <form id="editCreditForm">
+                <div>
+                    <label for="userName">User Name:</label>
+                    <input type="text" id="userName" name="userName" readonly>
+                </div>
+                <div>
+                    <label for="userEmail">User Email:</label>
+                    <input type="email" id="userEmail" name="userEmail" readonly>
+                </div>
+                <div>
+                    <label for="currentCreditLimit">Current Credit Limit:</label>
+                    <input type="number" id="currentCreditLimit" name="currentCreditLimit" readonly>
+                </div>
+                <div>
+                    <label for="newCreditLimit">New Credit Limit:</label>
+                    <input type="number" id="newCreditLimit" name="newCreditLimit" required>
+                </div>
+                <button type="submit">Update Credit Limit</button>
+            </form>
+        </section>
+    </div>
+    <script src="js/credit_limits.js"></script> <!-- Your JS logic here -->
+</body>
+</html>

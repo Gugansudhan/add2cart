@@ -1,0 +1,171 @@
+/* General styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+
+body {
+    min-height: 100vh;
+    background: url(images/html_table.jpg) center / cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header styles */
+header {
+    background-color: #232f3e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+/* Main cart styles */
+main {
+    margin: 30px;
+    width: 80vw;
+    max-width: 1200px; /* Ensure it doesn't grow too large on wide screens */
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#cart-items {
+    flex: 1;
+    overflow-y: auto;
+}
+
+#cart-summary {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: #d5d1de;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 246, 246, 0.9);
+}
+
+td {
+    padding: 1rem;
+    text-align: center;
+}
+
+.increase, .decrease {
+    padding: 5px;
+}
+
+/* Summary styles */
+#total-price {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#clear-cart-button {
+    background-color: #dc3545;
+}
+
+#clear-cart-button:hover {
+    background-color: #c82333;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #232f3e;
+    color: white;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    main {
+        width: 90vw; /* Adjust width for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        width: 95vw; /* For smaller screens, increase the width */
+        height: auto; /* Let height adjust naturally */
+    }
+
+    table, tbody, th, td {
+        display: block;
+        width: 100%; /* Ensure table content takes up full width */
+    }
+
+    td {
+        text-align: left; /* Align text to the left on smaller screens */
+        padding: 10px;
+    }
+
+    /* Ensure buttons stack */
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin: 20px;
+        padding: 10px; /* Reduce padding for small screens */
+    }
+
+    td {
+        font-size: 14px; /* Make the text a bit smaller for small devices */
+    }
+
+    #total-price {
+        font-size: 18px; /* Slightly reduce total price font size */
+    }
+}

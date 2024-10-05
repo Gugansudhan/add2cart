@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #060881;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #f2f2f2;
+    }
+
+    .quantity-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .quantity-buttons button {
+      margin: 0 5px;
+    }
+
+    #cart-summary {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    #clear-cart-button,
+    #checkout-button,
+    #go-back button {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin: 10px;
+      border-radius: 5px;
+    }
+
+    #clear-cart-button:hover,
+    #checkout-button:hover,
+    #go-back button:hover {
+      background-color: #ff4040;
+    }
+
+    #go-back a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border-radius: 5px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Your Cart</h1>
+    <a href="Customerhomepage.html" style="color: white;">Continue Shopping</a>
+  </header>
+
+  <main>
+    <section id="cart-items">
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items-body">
+          <!-- Cart items will be dynamically loaded here -->
+        </tbody>
+      </table>
+    </section>
+
+    <div id="cart-summary">
+      <p>Total: $<span id="total-price">0.00</span></p>
+      <button id="checkout-button">Proceed to Checkout</button>
+      <button id="clear-cart-button">Clear Cart</button>
+    </div>
+
+    <div id="go-back">
+      <button onclick="goBack()">Go Back</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Shopperz Stop. Website</p>
+  </footer>
+
+  <script>
+    const cartItemsBody = document.getElementById('cart-items-body');
+    const totalPriceElement = document.getElementById('total-price');
+    const checkoutButton = document.getElementById('checkout-button');
+    const clearCartButton = document.getElementById('clear-cart-button');
+
+    const API_KEY = "AIzaSyA0j1H8_v-ZaVa25wZkDuOf_oEgz3xhb_o"; 
+    const PROJECT_ID = "e-commerce-website-bf09a";  
+    const COLLECTION_ID = "carts"; 
+
+    let totalAmount = 0;
+
+    async function fetchCartItems() {
+      const userId = localStorage.getItem('loggedInUserId');
+      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_ID}?key=${API_KEY}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.documents) {
+          const cartData = data.documents
+            .filter(doc => doc.name.includes(userId))
+            .map(doc => ({
+              id: doc.name.split('/').pop(),
+              name: doc.fields.name.stringValue,
+              price: parseFloat(doc.fields.price.doubleValue),
+              quantity: parseInt(doc.fields.quantity.integerValue)
+            }));
+
+          if (cartData.length > 0) {
+            displayCartItems(cartData);
+          } else {
+            cartItemsBody.innerHTML = '<tr><td colspan="4">Your cart is empty.</td></tr>';
+          }
+        } else {
+          cartItemsBody.innerHTML = '<tr><td colspan="4">Your cart is empty.</td></tr>';
+        }
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    }
+
+    function displayCartItems(items) {
+      cartItemsBody.innerHTML = '';  
+      totalAmount = 0;
+
+      items.forEach((item) => {
+        const cartRow = document.createElement('tr');
+        cartRow.innerHTML = `
+          <td>${item.name}</td>
+          <td>$${item.price.toFixed(2)}</td>
+          <td class="quantity-buttons">
+            <button class="decrease" data-id="${item.id}">-</button>
+            <span class="quantity">${item.quantity}</span>
+            <button class="increase" data-id="${item.id}">+</button>
+          </td>
+          <td>$<span class="subtotal">${(item.price * item.quantity).toFixed(2)}</span></td>
+        `;
+        cartItemsBody.appendChild(cartRow);
+        totalAmount += item.price * item.quantity;
+      });
+
+      totalPriceElement.textContent = totalAmount.toFixed(2);
+      setupCartItemListeners();
+    }
+
+    function setupCartItemListeners() {
+      const increaseButtons = document.querySelectorAll('.increase');
+      const decreaseButtons = document.querySelectorAll('.decrease');
+
+      increaseButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          const productId = event.target.getAttribute('data-id');
+          updateQuantity(productId, 'increase');
+        });
+      });
+
+      decreaseButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          const productId = event.target.getAttribute('data-id');
+          updateQuantity(productId, 'decrease');
+        });
+      });
+    }
+
+    async function updateQuantity(productId, action) {
+      const userId = localStorage.getItem('loggedInUserId');
+      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_ID}/${productId}?key=${API_KEY}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.fields) {
+          const productData = {
+            name: data.fields.name.stringValue,
+            price: parseFloat(data.fields.price.doubleValue),
+            currentQuantity: parseInt(data.fields.quantity.integerValue),
+            description: data.fields.description.stringValue,
+            imageUrl: data.fields.imageUrl.stringValue,
+            productId: data.fields.productId.stringValue,
+            userId: data.fields.userId.stringValue
+          };
+
+          if (action === 'increase') {
+            productData.currentQuantity += 1;
+          } else if (action === 'decrease') {
+            productData.currentQuantity -= 1;
+          }
+
+          if (productData.currentQuantity === 0) {
+            await removeItemFromCart(productId);
+          } else {
+            const updatedData = {
+              fields: {
+                name: { stringValue: productData.name },
+                price: { doubleValue: productData.price },
+                quantity: { integerValue: productData.currentQuantity },
+                description: { stringValue: productData.description },
+                imageUrl: { stringValue: productData.imageUrl },
+                productId: { stringValue: productData.productId },
+                userId: { stringValue: productData.userId }
+              }
+            };
+
+            await fetch(url, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(updatedData)
+            });
+          }
+        }
+
+        fetchCartItems();
+      } catch (error) {
+        console.error('Error updating quantity:', error);
+      }
+    }
+
+    async function removeItemFromCart(productId) {
+      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_ID}/${productId}?key=${API_KEY}`;
+
+      try {
+        await fetch(url, {
+          method: 'DELETE'
+        });
+
+        fetchCartItems();
+      } catch (error) {
+        console.error('Error removing item from cart:', error);
+      }
+    }
+
+    clearCartButton.addEventListener('click', async () => {
+      const userId = localStorage.getItem('loggedInUserId');
+      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${COLLECTION_ID}?key=${API_KEY}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.documents) {
+          const userCartItems = data.documents.filter(doc => doc.name.includes(userId));
+
+          for (let cartItem of userCartItems) {
+            const productId = cartItem.name.split('/').pop();
+            await removeItemFromCart(productId);
+          }
+
+          totalAmount = 0;
+          totalPriceElement.textContent = totalAmount.toFixed(2);
+        }
+      } catch (error) {
+        console.error('Error clearing cart:', error);
+      }
+    });
+
+    function goBack() {
+      window.location.href = 'Customerhomepage.html';
+    }
+
+    // Proceed to checkout
+  checkoutButton.addEventListener('click', () => {
+  window.location.href = 'Productcheckout.html'; // Redirect to checkout page
+});
+
+
+    window.onload = fetchCartItems;
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <script src="js/sales_report.js"></script>
+    <link rel="stylesheet" href="css/sales_report.css">
+
+</head>
+<body>
+    <div id="content" class="container">
+        <h1>Sales Report</h1>
+    
+    <div>
+        <label for="start-date">Start Date: </label>
+        <input type="date" id="start-date"><br>
+        <label for="end-date">End Date: </label>
+        <input type="date" id="end-date">
+    </div>
+
+    <button onclick="downloadAllSalesReport(document.getElementById('start-date').value, document.getElementById('end-date').value)">
+        Download All Sales
+    </button>
+
+    <button onclick="downloadCategoryWiseSalesReport(document.getElementById('start-date').value, document.getElementById('end-date').value)">
+        Download Category-wise Sales
+    </button>
+
+    <button onclick="downloadPaymentWiseSalesReport(document.getElementById('start-date').value, document.getElementById('end-date').value, 'cash-on-delivery')">
+        Download Cash Sales
+    </button>
+
+    <button onclick="downloadPaymentWiseSalesReport(document.getElementById('start-date').value, document.getElementById('end-date').value, 'credit-card')">
+        Download Credit Sales
+    </button>
+
+    <button onclick="downloadTopBottomSalesReport(document.getElementById('start-date').value, document.getElementById('end-date').value, 'top')">
+        Download Top 10 Selling Items
+    </button>
+
+    <button onclick="downloadTopBottomSalesReport(document.getElementById('start-date').value, document.getElementById('end-date').value, 'bottom')">
+        Download Bottom 10 Selling Items
+    </button>
+    </div>
+</body>
+</html>

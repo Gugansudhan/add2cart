@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reports</title>
+    <script src="js/reports.js" defer></script>
+    <link rel="stylesheet" href="css/reports.css">
+</head>
+<body>
+    <div id="content" class="container">
+        <h1>Customer Reports</h1>
+
+        <!-- Report buttons -->
+        <div>
+            <button id="all-orders-btn">Download All Customer Orders</button>
+        </div>
+
+        <div>
+            <h2>Top 10 Customer Orders by Quantity</h2>
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date">
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date">
+            <button id="top-orders-btn">Download Top 10 Customer Orders</button>
+        </div>
+
+        <div>
+            <h2>Cash Purchase Reports</h2>
+            <label for="cash-start-date">Start Date:</label>
+            <input type="date" id="cash-start-date">
+            <label for="cash-end-date">End Date:</label>
+            <input type="date" id="cash-end-date">
+            <button id="cash-orders-btn">Download Cash Purchase Reports</button>
+        </div>
+
+        <div>
+            <h2>Credit Purchase Reports</h2>
+            <label for="credit-start-date">Start Date:</label>
+            <input type="date" id="credit-start-date">
+            <label for="credit-end-date">End Date:</label>
+            <input type="date" id="credit-end-date">
+            <button id="credit-orders-btn">Download Credit Purchase Reports</button>
+        </div>
+    </div>
+</body>
+</html>

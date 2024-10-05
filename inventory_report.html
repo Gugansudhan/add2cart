@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Report</title>
+    <link rel="stylesheet" href="css/inventory_report.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Inventory Report</h1>
+
+        <h2>Current Stock</h2>
+        <button onclick="downloadCurrentStock('all')">Download All</button>
+        <button onclick="downloadCurrentStock('category')">Download Category-wise</button><br><br>
+
+        <h2>High Stock / Low Stock</h2>
+        <button onclick="downloadStockReport('high')">Download High Stock (>100 units)</button>
+        <button onclick="downloadStockReport('low')">Download Low Stock (<15 units)</button>
+    </div>
+
+    <script src="js/inventory_report.js"></script>
+</body>
+</html>
